@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 15vh;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    border-radius: 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    background-color: black;
+    color: white;
+    padding: 0px 20px;
+}
+
+.webname {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 2rem;
+}
+.menu:hover  {
+    transform: scale(1.1);
+    color: #ffc107;
+    cursor: pointer;
+}
+
+.clear {
+    font-size: 60px;
+    font-weight: bold;
+    margin-right: 2rem;
+}
+.clear:hover {
+    transform: scale(1.1);
+    color: #ffc107;
+    cursor: pointer;
+}

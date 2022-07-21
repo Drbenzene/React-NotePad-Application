@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 73vh;
+}
+.note{
+    margin-top: 10px;
+    margin-left:10px;
+    width: 300px;
+    height: 300px;
+    text-align: justify;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 20px;
+}
+.dateandtime {
+    color: #8c8c8c;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight:bold;
+    font-size: 13px;
+}
+
+#modifying {
+    cursor: pointer;
+    padding-left: 6rem;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+}
+.icons :nth-child(1) {
+    margin-right: 20px;
+}
+
+.swal-wide{
+    width:200px !important;
+}
+
+.note{
+    margin-top: 10px;
+    margin-left:10px;
+    width: 300px;
+    height: 300px;
+    text-align: justify;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 20px;
+}
+
+.icons {
+    display: flex;
+    justify-content:flex-end;
+    margin-top: 5px;
+    font-size: 15px;
+}
+.icons :nth-child(1) {
+    margin-right: 20px;
+}
+
+.icons :nth-child(1):hover {
+    cursor: pointer;
+    color: #ffc107;
+
+}
+
+
+.icons button {
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    outline:none;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.clearbtn {
+    background-color: #ff0000;
+}
+
+.addbtn {
+    background-color: green;
+}
+
+form textarea {
+    border: none;
+    width: 100%;
+    height: 10rem;
+    resize: none;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+form input {
+    border: none;
+    height: 30px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+input, textarea :active{
+    border: none;
+    outline:none;
+}
+
+textarea, input :active{
+    border: none;
+    outline:none;
+}
+
+.fav {
+    color: red
+}
