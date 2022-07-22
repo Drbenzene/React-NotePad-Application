@@ -7,6 +7,7 @@ function Toggle() {
     <div className={styles.container} >
         <div className={styles.content}>
         <ImCancelCircle />
+        
         Hello
         </div>
 

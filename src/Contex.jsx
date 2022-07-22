@@ -61,13 +61,25 @@ const Provider = (props) => {
         modified: "",
       })
 
+
     //Reuseable Code For local storage and Data Persisiting
     /* A hook that is used to store data in local storage. */
 
       useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes));
-      }, [notes]);
-    
+        
+       const getFav = localStorage.getItem('favourites')
+       console.log(getFav)
+        if (getFav && getFav.length > 0) {
+          setFavourites(JSON.parse(getFav));
+
+        } else {
+          setFavourites([]);
+        }
+
+      }, []);
+
+// console.log(favourites)
     
     const titleChangeHandler = (e) => {
       setTitle(e.target.value);
@@ -107,7 +119,7 @@ const Provider = (props) => {
               noteText: text,
               favourites: false,
               modified: date,
-              like: false
+              like: false,
             }
           ]);
 
@@ -217,12 +229,17 @@ Swal.fire({
             // console.log(copy.filter(note => favourites.includes(note.id)))
             setFavourites([...favourites, item ])
              const fa = favourites.find((f) => f.id === item.id)
-             console.log(fa)
+            //  console.log(fa)
             if(!fa) {
                 setFavourites([...favourites, item ])
+                localStorage.setItem("favourites", JSON.stringify(favourites))
+                console.log("Added Fav", favourites)
             } else {
                 const newFavourites = favourites.filter((f)=> f.id !== fa.id)
                 setFavourites(newFavourites)
+                console.log("Fav Removed", newFavourites)
+                localStorage.setItem("favourites", JSON.stringify(newFavourites))
+
             }
 
         }
@@ -256,9 +273,12 @@ Swal.fire({
 
       const menuHandler = async () => {
         await Swal.fire({
-          // title: 'Menu👋',
           html:
-            '<a href="https://www.w3schools.com" target="_blank">Calender</a>',
+          '<a href="/">Home</a>' +
+          '<p><a href="/Calender">Calender</a></p>' +
+          '<p class="thenavs"><a href="/favourites">Favourite Notes</a></p>' +
+          '© Copyright 2022, Boyinbode Ebenezer Ayomide'+
+          '<p>All Right Reserved</p>',
           position: 'top-start',
           showClass: {
             popup: `
@@ -279,6 +299,8 @@ Swal.fire({
           showConfirmButton: false,
           showCloseButton: true
         })
+
+        
       }
         const state = {
             notes, setNote, update,
