@@ -6,7 +6,6 @@ import '../../App.css';
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { AiOutlineClear } from "react-icons/ai";
 import {GlobalContext} from '../../Contex'
-import Swal from 'sweetalert2'
 import 'animate.css';
 
 let today = new Date();
@@ -17,12 +16,12 @@ let date =
 function Notes() {
   const store = useContext(GlobalContext);
   const {update, title, titleChangeHandler, textChangeHandler, text, updated, updateChangeHandler, clearHandler, notes, handleSubmit, onNoteUpdate, favourite, favouriteHandler,
-  deleteHandler, updateHandler, addCol  } = store
+  deleteHandler, updateHandler,  } = store
 
   return (
     <div className={styles.container}>
 
-      {update === true ? (      <div className={styles.note}>
+      {update === true ? ( <div className={styles.note}>
       <form>
           <label>
             <h3>

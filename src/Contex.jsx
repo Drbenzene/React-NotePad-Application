@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import './index.css'
+import { v4 as uuidv4 } from 'uuid'
 
 const GlobalContext = React.createContext();
 
@@ -25,6 +27,10 @@ const Provider = (props) => {
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
           timer: 1500,
           timerProgressBar: true,
           didOpen: (toast) => {
@@ -39,16 +45,12 @@ const Provider = (props) => {
         })
       }
     
-      const [notes, setNote] = useState(localStorage.notes ? JSON.parse(localStorage.notes) :[]);
+      const [notes, setNote] = useState(localStorage.notes ? JSON.parse(localStorage.notes) : []);
       const [update, setUpdate] = useState(false);
       const [title, setTitle] = useState("");
       const [favourite, setFavourite] = useState("")
       const[fav, setFav] = useState(false)
-      const [favourites, setFavourites] = useState([{
-        id: "",
-        noteTitle: "",
-        noteText: "",
-      }])
+      const [favourites, setFavourites] = useState([])
       const [text, setText] = useState("");
       const [updated, setUpdated] = useState({
         id: "",
@@ -79,7 +81,6 @@ const Provider = (props) => {
          })
       }
       
-      
       const handleSubmit = (e) => {
         e.preventDefault();
         setTitle(title);
@@ -98,7 +99,7 @@ const Provider = (props) => {
           setNote([
             ...notes,
             {
-              id: notes.length,
+              id: uuidv4(),
               noteTitle: title,
               noteText: text,
               favourites: false
@@ -143,9 +144,25 @@ Swal.fire({
         setText("");
       };
     
-      const deleteHandler = (id) => {
+      const deleteHandler = async (id) => {
         let filtered = notes.filter(note => note.id !== id)
-        theAlert("Deleted", "success")
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            iconColor: 'white',
+            customClass: {
+              popup: 'colored-toast'
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true
+          })
+          await Toast.fire({
+            icon: 'error',
+            title: 'Deleted'
+          })
+
         setNote(filtered);
         localStorage.setItem("notes", JSON.stringify(filtered));
       }
@@ -178,7 +195,7 @@ Swal.fire({
 
         if (fav === true) {
             e.target.classList.toggle("fav")
-            console.log(e.target)
+            // console.log(e.target)
     
             const copy = [...notes]
             let item = copy.find(note => note.id === id)
@@ -188,18 +205,25 @@ Swal.fire({
             } else {
                 item.favourites = true
             }
+
             setNote(copy)
 
-            if(favourites.includes(item.id)) {
-                return
-            } else {
+            // console.log(copy.filter(note => favourites.includes(note.id)))
+            setFavourites([...favourites, item ])
+             const fa = favourites.find((f) => f.id === item.id)
+             console.log(fa)
+            if(!fa) {
                 setFavourites([...favourites, item ])
-                console.log(favourites)
+            } else {
+                const newFavourites = favourites.filter((f)=> f.id !== fa.id)
+                setFavourites(newFavourites)
             }
 
         }
 
       }
+
+      console.log(favourites)
 
         const state = {
             notes, setNote, update,
