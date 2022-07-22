@@ -9,11 +9,11 @@ function Header() {
 
   const store = useContext(GlobalContext);
 
-  const {handleClearAll} = store
+  const {handleClearAll, menuHandler} = store
   return (
     <div className={styles.navbar}>
     <div>
-        <GiHamburgerMenu size="30px"/>
+        <GiHamburgerMenu onClick={menuHandler} size="30px"/>
     </div>
     <div className={styles.webname}>
         NotePad

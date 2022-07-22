@@ -2,7 +2,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Notes from './Components/Notes/Notes';
-import Add from './Components/Add/Add';
+import Toggle from './Components/Toggle/Toggle'
 
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
       <Header />
       <Notes />
       <Footer />
+      {/* <Toggle /> */}
       {/* <Add /> */}
 
     </div>

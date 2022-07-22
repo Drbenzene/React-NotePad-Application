@@ -1,22 +1,23 @@
 import React, {useState, useEffect, useContext} from "react";
-import { MdAutoDelete, MdEditNote, MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { MdAutoDelete, MdEditNote, MdFavoriteBorder} from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import styles from "./Notes.module.css";
 import '../../App.css';
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { AiOutlineClear } from "react-icons/ai";
+import { AiOutlineClear, AiTwotoneLike, AiFillHeart } from "react-icons/ai";
 import {GlobalContext} from '../../Contex'
 import 'animate.css';
 
-let today = new Date();
-let date =
-  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + "," + today.getHours() + ":" + today.getMinutes();
-  ;
+// let today = new Date();
+// let date =
+//   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + "," + today.getHours() + ":" + today.getMinutes();
+//   ;
+
 
 function Notes() {
   const store = useContext(GlobalContext);
   const {update, title, titleChangeHandler, textChangeHandler, text, updated, updateChangeHandler, clearHandler, notes, handleSubmit, onNoteUpdate, favourite, favouriteHandler,
-  deleteHandler, updateHandler,  } = store
+  deleteHandler, updateHandler, likeHandler } = store
 
   return (
     <div className={styles.container}>
@@ -87,13 +88,14 @@ function Notes() {
 
       {notes.map((note) => (
               <div className={styles.note} key={note.id}>
-              <h3>{note.noteTitle}<MdFavoriteBorder id={styles.modifying} className={notes.favourites? "fav": ""} onClick={(e) => favouriteHandler(e, note.id)} /> </h3>
+              <h3>{note.noteTitle}<AiFillHeart id={styles.modifying} className={notes.favourites? "fav": ""} onClick={(e) => favouriteHandler(e, note.id)} /> 
+              <AiTwotoneLike id={styles.modifying} className={notes.like ? "like" : ""} onClick={(e) => likeHandler(e, note.id)} /></h3>
               <p className={styles}>
               {note.noteText}
               </p>
               <div className={styles.options}>
                 <div>
-                  <span className={styles.dateandtime}>Modified: {date}</span>
+                  <span className={styles.dateandtime}>Modified: {note.modified}</span>
                 </div>
                 <div className={styles.icons}>
                   <MdAutoDelete onClick={() => deleteHandler(note.id)} size="20px" />

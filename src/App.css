@@ -6,6 +6,12 @@
   fill: red;
 }
 
+.like {
+  color: blue;
+  /* background-color: blue; */
+  fill: blue;
+}
+
 #navbar {
   position: fixed; 
   bottom: 0;

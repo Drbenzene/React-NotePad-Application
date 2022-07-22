@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import './index.css'
 import { v4 as uuidv4 } from 'uuid'
+import likeTone from './Assets/Facebook.mp3'
 
 const GlobalContext = React.createContext();
+
+let date = new Date().toLocaleString();
 
 const Provider = (props) => {
     const alertMsg = (message, icon) => {
@@ -20,9 +23,7 @@ const Provider = (props) => {
         })
     
       }
-    
       const theAlert = (message, icon) => {
-     
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -50,12 +51,14 @@ const Provider = (props) => {
       const [title, setTitle] = useState("");
       const [favourite, setFavourite] = useState("")
       const[fav, setFav] = useState(false)
+      const [like, setLike] = useState(false)
       const [favourites, setFavourites] = useState([])
       const [text, setText] = useState("");
       const [updated, setUpdated] = useState({
         id: "",
         noteTitle: "",
         noteText: "",
+        modified: "",
       })
 
     //Reuseable Code For local storage and Data Persisiting
@@ -102,7 +105,9 @@ const Provider = (props) => {
               id: uuidv4(),
               noteTitle: title,
               noteText: text,
-              favourites: false
+              favourites: false,
+              modified: date,
+              like: false
             }
           ]);
 
@@ -182,6 +187,7 @@ Swal.fire({
     
         copyNotes[Index].noteText = updated.noteText;
         copyNotes[Index].noteTitle = updated.noteTitle;
+        copyNotes[Index].modified = date
     
         setNote(copyNotes)
         localStorage.setItem("notes", JSON.stringify(copyNotes));
@@ -223,15 +229,64 @@ Swal.fire({
 
       }
 
-      console.log(favourites)
+      const likeHandler = (e, id) => {
+        setLike(true)
 
+        if (like === true) {
+          e.target.classList.toggle("like")
+
+          const copy = [...notes]
+          let item = copy.find(note => note.id === id)
+
+
+          if (item.like) {
+            item.like = false
+        } else {
+            item.like = true
+            const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+            e.target.addEventListener("click", () => {
+                audio.play();
+              });
+  
+        }
+
+        setNote(copy)
+        } 
+      }
+
+      const menuHandler = async () => {
+        await Swal.fire({
+          // title: 'Menu👋',
+          html:
+            '<a href="https://www.w3schools.com" target="_blank">Calender</a>',
+          position: 'top-start',
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInLeft
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutLeft
+              animate__faster
+            `
+          },
+          grow: 'column',
+          width: 300,
+          showConfirmButton: false,
+          showCloseButton: true
+        })
+      }
         const state = {
             notes, setNote, update,
             updated, setUpdate,
             title, setTitle, favourite, setFavourite, favourites, setFavourites,
             text, setText, setUpdated, theAlert, alertMsg, favouriteHandler,
             onNoteUpdate, deleteHandler, updateHandler, handleSubmit, clearHandler, updateChangeHandler, titleChangeHandler, textChangeHandler,
-             handleClearAll
+            handleClearAll, menuHandler, likeHandler
     
         }
         
