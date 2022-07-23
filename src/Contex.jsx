@@ -117,7 +117,7 @@ const Provider = (props) => {
               id: uuidv4(),
               noteTitle: title,
               noteText: text,
-              favourites: false,
+              favourites: true,
               modified: date,
               like: false,
             }
@@ -218,6 +218,7 @@ Swal.fire({
             const copy = [...notes]
             let item = copy.find(note => note.id === id)
 
+            item.favourites = true;
             if (item.favourites) {
                 item.favourites = false
             } else {

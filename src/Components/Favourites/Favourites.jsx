@@ -9,17 +9,16 @@ import { AiOutlineClear, AiTwotoneLike, AiFillHeart } from "react-icons/ai";
 
 function Favourites() {
     const store = useContext(GlobalContext);
-    const {update, title, titleChangeHandler, textChangeHandler, text, updated, updateChangeHandler, clearHandler, notes, handleSubmit, onNoteUpdate, favourite, favouriteHandler,
-        deleteHandler, updateHandler, likeHandler, favourites, setFavourites } = store
+    const { notes, deleteHandler, updateHandler, likeHandler, favourites, favouriteHandler } = store
 
         console.log(favourites)
 
   return (
     <div className={styles.container}>
-                <div className={styles.note}>
+  
         {favourites.map((theFav) => (
-        <div className={styles.theFav} key={theFav.id}>
-        <h3>{favourites.noteTitle}<AiFillHeart id={styles.modifying} className={favourites.favourites? "fav": ""} onClick={(e) => favouriteHandler(e, theFav.id)} /> 
+        <div className={styles.note} key={theFav.id}>
+        <h3>{theFav.noteTitle}<AiFillHeart id={styles.modifying} className={favourites.favourites? "fav": ""} onClick={(e) => favouriteHandler(e, theFav.id)} /> 
         <AiTwotoneLike id={styles.modifying} className={notes.like ? "like" : ""} onClick={(e) => likeHandler(e, theFav.id)} /></h3>
         <p className={styles}>
         {theFav.noteText}
@@ -29,15 +28,14 @@ function Favourites() {
             <span className={styles.dateandtime}>Modified: {theFav.modified}</span>
           </div>
           <div className={styles.icons}>
-            <MdAutoDelete onClick={() => deleteHandler(theFav.id)} size="20px" />
-            <FaEdit onClick={() => updateHandler(theFav.id)} size="20px" />
+            {/* <MdAutoDelete onClick={() => deleteHandler(theFav.id)} size="20px" />
+            <FaEdit onClick={() => updateHandler(theFav.id)} size="20px" /> */}
           </div>
         </div>
       
       </div>   
 ))}
 
-    </div>
     </div>
 
   )
